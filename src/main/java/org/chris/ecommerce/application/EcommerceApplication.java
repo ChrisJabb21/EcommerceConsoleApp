@@ -15,9 +15,10 @@ public class EcommerceApplication
     {
     	try{
     		EcommerceController ecommerceController = new EcommerceController();
+    		ecommerceController.startBrowsing();
     	}
     	catch(Exception e){
-    		System.out.println("The ecommerce platform is having issues initializing");
+    		System.out.println("The ecommerce platform is having issues loading");
     		System.out.println("Try again later!");
     	}
     }

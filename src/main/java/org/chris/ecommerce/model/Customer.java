@@ -4,13 +4,15 @@ public class Customer {
 	
 	private String id;
 	private String password;
-	private String email;
-	private String name;
+	private String email;// Unique constraint
+	private String name; //make full name and last name separate
 	private String address;
 	private String contactNumber;
+	
 	//TO ADD: Date registered
 	//Additional addresses
 	
+	//Collection invoice records attribute as object or String
 
 	public Customer(String id, String password, 
 			String email, String name, String address,
@@ -23,6 +25,17 @@ public class Customer {
 		this.contactNumber = contactNumber;
 	}
 	
+	public Customer(String name, String address, String contactNumber, String password, String email) {
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.address = address;
+		this.contactNumber = contactNumber;
+	}
+
+
+
+
 	public String getId() {
 		return id;
 	}
@@ -61,6 +74,12 @@ public class Customer {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", password=" + password + ", email=" + email + ", name=" + name + ", address="
+				+ address + ", contactNumber=" + contactNumber + "]";
 	}
 	
 	

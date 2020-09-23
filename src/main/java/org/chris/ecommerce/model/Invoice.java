@@ -5,54 +5,97 @@ import java.util.Date;
 import java.util.List;
 
 
-/*the unique invoice number, name of seller, the company’s name, address, contact details, name of the buyer, address, items purchased, total cost, etc.*/
 
 public class Invoice {
 	
 	
 	private long invoiceNo;
-	private String customerName; //this would be the full name of customer in invoice
-	private BigDecimal total;
-	private List<Product> purchases;
-	private Date DateOfTransaction;
+	private String email; //this would be the full name of customer in invoice
+	private long itemId;
+	private String itemName;
+	private String itemCode;
+	private BigDecimal itemPrice; //price
+	private BigDecimal itemtotal;
+	private Date purchaseDate;
+	private int quantity = 1;
+	private BigDecimal invoiceTotal;
 	
+	//Idea: make an counter for the quantity of a product that appears more than once in the list
+	
+	@Override
+	public String toString() {
+		
+		String formatString = "+=======Invoice===========+\n"
+				+ "|Customer Email: " + email + " Date: " + purchaseDate + " |\n"
+				+ "|P.No\t Name \t Price \t Quantity \t Total  | \n"
+				+ "|" +itemId + "\t" + itemName + "\t" + itemCode +"\t" + itemPrice +"\t" + quantity +"\t" + itemPrice +"$"+ "| \n" 
+				+ "|------------------------------------\n"
+				+ "|Total = $"+ invoiceTotal + "| \n"
+				+ "|Thanks for visiting  \n"
+				+ "============================================|";
+			
+		
+		return "Invoice [invoiceNo=" + invoiceNo + ", email=" + email + ", itemName=" + itemName + ", itemCode="
+				+ itemCode + ", itemPrice=" + itemPrice + ", purchaseDate=" + purchaseDate + ", quantity=" + quantity
+				+ ", itemtotal=" + itemtotal + ", invoiceTotal=" + invoiceTotal + "]";
+	}
 	public long getInvoiceNo() {
 		return invoiceNo;
 	}
 	public void setInvoiceNo(long invoiceNo) {
 		this.invoiceNo = invoiceNo;
 	}
-	public String getCustomerName() {
-		return customerName;
+	
+	public Date getPurchaseDate() {
+		return purchaseDate;
 	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
 	}
-	public BigDecimal getTotal() {
-		return total;
+	public String getEmail() {
+		return email;
 	}
-	public void setTotal(BigDecimal total) {
-		this.total = total;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public List<Product> getPurchases() {
-		return purchases;
+	public String getItemName() {
+		return itemName;
 	}
-	public void setPurchases(List<Product> purchases) {
-		this.purchases = purchases;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getItemCode() {
+		return itemCode;
+	}
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+	public BigDecimal getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(BigDecimal itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public BigDecimal getItemtotal() {
+		return itemtotal;
+	}
+	public void setItemtotal(BigDecimal itemtotal) {
+		this.itemtotal = itemtotal;
+	}
+	public BigDecimal getInvoiceTotal() {
+		return invoiceTotal;
+	}
+	public void setInvoiceTotal(BigDecimal invoiceTotal) {
+		this.invoiceTotal = invoiceTotal;
 	}
 	
-	public Date getDateOfTransaction() {
-		return DateOfTransaction;
-	}
-	public void setDateOfTransaction(Date dateOfTransaction) {
-		DateOfTransaction = dateOfTransaction;
-	}
 	
-	@Override
-	public String toString() {
-		return "Invoice [invoiceNo=" + invoiceNo + ", customerName=" + customerName + ", total=" + total
-				+ ", purchases=" + purchases + ", DateOfTransaction=" + DateOfTransaction + "]";
-	}
 		
 }
 
