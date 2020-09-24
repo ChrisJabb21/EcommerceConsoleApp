@@ -4,15 +4,15 @@ public class Customer {
 	
 	private String id;
 	private String password;
-	private String email;// Unique constraint
-	private String name; //make full name and last name separate
+	private String email;// Unique constraint 
+	private String name; //make first name and last name separate
 	private String address;
 	private String contactNumber;
 	
 	//TO ADD: Date registered
 	//Additional addresses
 	
-	//Collection invoice records attribute as object or String
+	//have a Collection object or String for customer
 
 	public Customer(String id, String password, 
 			String email, String name, String address,
