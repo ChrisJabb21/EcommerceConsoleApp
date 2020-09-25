@@ -1,5 +1,3 @@
-
-
 ## Ecommerce Java Console Application
 
 A ecommerce console/CLI application written in Core Java. Uses a MVC design architecture.

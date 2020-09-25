@@ -1,29 +1,19 @@
 package org.chris.ecommerce.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-
-
+//import java.util.Date;
+//import java.util.List;
 
 public class Invoice {
 	
-	
 	private long invoiceNo;
 	private Customer customer;
-	//private String email; //this would be the unique identifier of customer in invoice
 	private Item item;
-	// private long itemId;
-	// private String itemName;
-	// private String itemCode;
-	// private BigDecimal itemPrice; //price
-	// private BigDecimal itemtotal;
+	//private List<Item> items;
 	private String purchaseDate;
 	private int quantity = 1; //change to totalitemsQTY bought
 	private BigDecimal invoiceTotal;
 	
-	//Idea: make an counter for the quantity of a product that appears more than once in the list
-
 	public Invoice(long invoiceNo, Customer customer, Item item, String purchaseDate, BigDecimal invoiceTotal) {
 		this.invoiceNo = invoiceNo;
 		this.customer = customer;
@@ -35,29 +25,24 @@ public class Invoice {
 	
 	@Override
 	public String toString() {
-		
-		String formatString = "+=======Invoice===========+\n"
-				+ "|Customer Email: " + customer.getEmail() + " Date: " + purchaseDate + " |\n"
-				+ "|P.No\t Name \t Price \t Quantity \t Total  | \n"
-				+ "|" +item.getpId() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + "$"+ item.getItemPrice() + "| \n" 
-				+ "|------------------------------------\n"
-				+ "|Total = $"+ invoiceTotal + "| \n"
-				+ "|Thanks for visiting  \n"
-				+ "============================================|";
-			
 
-		return "Invoice [invoiceNo=" + invoiceNo + ", email=" +  customer.getEmail() + ", itemName=" + item.getName() + ", itemCode="
-				+  item.getItemCode() + ", itemPrice=" + item.getItemPrice()  + ", quantity=" + quantity+ ", invoiceTotal=" + invoiceTotal + ", purchaseDate=" + purchaseDate + "]";
+	String testString= 
+		"Invoice No: \t EMAIL  \t ItemName \t ItemCode \t Price \t Quantity \t  ItemTotal \t PurchaseDate | \n"
+		+ invoiceNo + "\t" + customer.getEmail() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + item.getItemPrice() + "\t"+ getPurchaseDate() + "| \n";
+
+		return testString;
+
 	}
 
 	public String showInvoiceDetails(){
 		String formatString = "+=======Invoice===========+\n"
-		+ "|Customer Email: " + customer.getEmail() + " Date: " + purchaseDate + " |\n"
-		+ "|P.No\t Name \t Price \t Quantity \t Total  | \n"
-		+ "|" +item.getpId() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + "$"+ item.getItemPrice() + "| \n" 
-		+ "|------------------------------------\n"
-		+ "|Total = $"+ invoiceTotal + "| \n"
-		+ "|Thanks for visiting  \n"
+		+ "|Customer Email: " + customer.getEmail() + " Date: " + purchaseDate + "|\n"
+		+ "|Invoice No " + invoiceNo + "|\n"
+		+ "|P.No\t Name  \t ItemCode \t Price \t Quantity \t Total  | \n"
+		+ "|" +item.getpId() + "\t \t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + "$"+ item.getItemPrice() + "| \n" 
+		+ "|----------------------------------------------|\n"
+		+ "|Total = $"+ invoiceTotal +"|\n"
+		+ "|Thanks for visiting|\n"
 		+ "============================================|";
 
 		return formatString;
@@ -95,12 +80,29 @@ public class Invoice {
 		this.invoiceTotal = invoiceTotal;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
 
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-	
-	
-	
-		
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	// public List<Item> getItems() {
+	// 	return items;
+	// }
+
+	// public void setItems(List<Item> items) {
+	// 	this.items = items;
+	// }
 }
 
 

@@ -9,6 +9,7 @@ public class Customer {
 	private String address;
 	private String contactNumber;
 	
+	//Invoice list collection
 	//TO ADD: Date registered
 	//Additional addresses
 	
@@ -87,5 +88,4 @@ public class Customer {
 	public String toString() {
 		return "Customer [email=" + email + ", name=" + name + "]";
 	}
-
 }

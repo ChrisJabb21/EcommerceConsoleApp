@@ -10,7 +10,6 @@ import org.chris.ecommerce.model.Item;
 //Test Data
 public class DataGeneratorUtil {
 	
-	//TODO make test data
 	  public void generateCustomers(Map<String, Customer> customers){
 		  String cId = "C001";
 		  String cPassword = "password!12";
@@ -40,8 +39,18 @@ public class DataGeneratorUtil {
 		  BigDecimal pTestPrice = new BigDecimal("12.99");
 		  int quantityTest = 1;
 		  BigDecimal item2Total = pPrice;
-
 		  Item p2 = new Item(pTwoId, pTestName, pTestCode, pTestPrice, quantityTest, item2Total);
 		  items.put(pTwoId, p2); 
+		
+		long pThreeId = 3;
+		String pTestName3 = "GeForce RTX™ 3090";
+		String pTestCode3 = "GPU01";
+		BigDecimal pTestPrice3 = new BigDecimal("1499.00");
+		int quantityTest3 = 1;
+		BigDecimal item3Total = pTestPrice3;
+
+		Item p3 = new Item(pThreeId, pTestName3,pTestCode3,pTestPrice3,quantityTest3,item3Total);
+		items.put(pThreeId, p3); 
+
 	  }
 }

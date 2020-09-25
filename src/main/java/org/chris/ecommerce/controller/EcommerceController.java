@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class EcommerceController {
 	DataGeneratorUtil dataGeneratorUtil = new DataGeneratorUtil();
 	Map<String, Customer> customers;
 	Map<Long, Item> items;
-	Map<Long, Invoice> invoices; ///Place to store the invoices a customer creates
+	Map<Long, Invoice> invoices; /// Place to store the invoices a customer creates
 
 	Scanner consoleScan = new Scanner(System.in);
 	private Invoice invoice;
@@ -79,7 +78,6 @@ public class EcommerceController {
 		String inputToParse;
 		int selected;
 
-		System.out.println("+======Login Successful!=========+");
 
 		System.out.println("+================================+");
 		System.out.println("|1. Buy an Item                  |");
@@ -112,18 +110,18 @@ public class EcommerceController {
 		Customer customer;
 		String email;
 		String password;
-		// String confirm_password;
+		//String confirm_password;
 		String name;
-		String address;
-		String contactNo;
+		//String address;
+		//String contactNo;
 		System.out.println("Enter your details for a new customer account");
 
 		System.out.println("Name: ");
 		name = consoleScan.nextLine();
-		System.out.println("Address: ");
-		address = consoleScan.nextLine();
-		System.out.println("Contact Number: ");
-		contactNo = consoleScan.nextLine();
+		// System.out.println("Address: ");
+		// address = consoleScan.nextLine();
+		// System.out.println("Contact Number: ");
+		// contactNo = consoleScan.nextLine();
 
 		System.out.println("Email: ");
 		email = consoleScan.nextLine();
@@ -139,7 +137,7 @@ public class EcommerceController {
 		// password = consoleScan.nextLine();
 		// password check for matching strings.
 
-		customer = new Customer(name, address, contactNo, password, email);
+		customer = new Customer(name, password, email);
 
 		customers.put(email, customer);
 	}
@@ -147,7 +145,7 @@ public class EcommerceController {
 	/**
 	 * Method to display all items for sale from datasource or testdata
 	 *
-	 * */
+	 */
 	private void showItems() {
 		Set set = items.entrySet();
 		Iterator iterator = set.iterator();
@@ -159,124 +157,91 @@ public class EcommerceController {
 		}
 		System.out.println("+================================+");
 	}
+	
 
-
-
-	//TODO
 	/**
 	 * Method for choosing an item to buy by its key and making it into an invoice by looking for its key value in hashmap.
 	 */
-	private void buyItem(Customer c) {
+	private void buyItem(Customer c) 
+	{
 		// Show list of items
 		String choice;
 		Long selected;
 		Item item;  //add values of item to Invoice
 		 // add email to invoice to identify user.
 
-		try {
 			showItems();
 			// select an item to buy and search for it by its key in the hashmap
 			System.out.println("Enter the product Id of the item you want to purchase");
 			//choice
 			choice = consoleScan.nextLine();
+			selected = Long.parseLong(choice);
+
 			try{
-				selected = Long.parseLong(choice);
-				
+				if(items.containsKey(selected))
+				{
+					item = items.get(selected);
+					Calendar cal = Calendar.getInstance();
+					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+					String strDate = sdf.format(cal.getTime());
+					String purchaseDate = strDate;
+	
+					long min = 1L;
+					long max = 100L;
+					long invoiceNo = min + (long)(Math.random() * (max-min));
+	
+					invoice = new Invoice(invoiceNo, c, item, purchaseDate, item.getItemTotal());
+					invoices.put(invoiceNo, invoice);
+	
+					invoice.showInvoiceDetails();
+	
+					invoice.toString();
+					System.out.println(invoice.showInvoiceDetails());
+					System.out.println(invoice.toString());
+				}
 			}
 			catch (Exception e) {
 				System.out.println("Please enter the product number from the catalog.");
+				}
 			}
-			if(items.containsKey(selected))
-			{
 
-				//get attributes of an item object attributes by hashmap key
-				item = items.get(selected);
-				
-				//take item value from map (get by itemId, itemName, price,)
-				// put its attributes into a invoice object
-
-				//set int
-				Calendar cal = Calendar.getInstance();
-        		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-				String strDate = sdf.format(cal.getTime());
-				String purchaseDate = strDate;
-
-				long min = 1L;
-				long max = 100L;
-				long invoiceNo = min + (long)(Math.random() * (max-min));
-
-				invoice = new Invoice(invoiceNo, c, item, purchaseDate, item.getItemTotal());
-				// get all the value part of items hashmap
-				//Get each attribute 
-				//Create Invoice instance
-				invoices.put(invoiceNo, invoice);
-
-				invoice.showInvoiceDetails();
-
-				invoice.toString();
-				//Add the created invoice into the invoice map
-				//Return the invoice object as formatted string
-			}
-			// else{
-			// 	System.out.println("Invalid choice..Try again");
-			// }
-
-
-			// select by itemNo or id.
-			// check if the item is in items map by suching for the key
-			// if found, instantiate an invoice object and return
-			// otherwise return exception
-		
-		} catch (Exception e) {
-			System.out.println("Please enter the product number from the catalog.");
-		}
-
-		// create an invoice for the purchase and add the data.
-	}
-
-	//TODO
+	// TODO change a datatype of purchase date for date check.
 	/**
 	 * Method for checking a purchase by invoice and purchase date and returning an
 	 * item within a 15 day return policy
 	 */
 	private void ReplaceItem(Customer c) {
 
-		Character input; 
+		Character input;
 		String itemCode;
 		Item itemReturned;
-		Invoice invoice;
-		System.out.println("Welcome " + c.getEmail()+ "!! Your invoice details are:");
-		//Display invoice as a list of items
-
-		//Enter the itemcode of item to return 
+		System.out.println("Welcome " + c.getEmail() + "!! Your invoice details are:");
+		System.out.println(invoice.toString());
+		
+		// Enter the itemcode of item to return
 		System.out.println("Enter the itemcode of the item to replace.");
-		//TODO: take string input to check if itemcode exists in invoice 
+		// TODO: take string input to check if itemcode exists in invoice
+		
+		itemCode = consoleScan.nextLine();
+//		if(itemCode.equals(invoice.getItem().getItemCode())){
+//		}
 
-/*
-		//TODO
-		//to convert a date in string back to calender object to check if item is bought within 15 days or the other day around
-		if(invoice.getPurchaseDate() <= 15)
-		{
-			System.out.println("Yes, you can return your purchase. Would you like to proceed");
-
-			 if(input == 'n' || input == 'N') {
-				 System.out.println("Your returning item is");
-				 //return item object as string
-			 }
-			 else if(input == 'y' || input == 'Y') {
-
-			 }
-		}
-		else {
-			System.out.println("You are not able to return your items, ");
-		} 
-
-
-		//check if it matches
-		//if item code is found in invoice 
-		//Return a message
-			//if within 15 days of purchase respond valid to return 
-*/
+		
+		  //TODO //to convert a date in string back to calender object to check if item // is bought within 15 days or the other day around 
+		//  if(invoice.getPurchaseDate() <= 15)
+		//  { 
+		// 	System.out.println("Yes, you can return your purchase. Would you like to proceed");
+		//   if(input == 'y' || input == 'Y') {
+		//   System.out.println("Your returning item is"); //return item object as string
+		//   } else if(input == 'n' || input == 'N') {
+		  
+		//   } 
+		// } else { System.out.println("You are not able to return your items, "); }
+		  
+		  
+		  //check if it matches //if item code is found in invoice //Return a message
+		  //if within 15 days of purchase respond valid to return
+		
 
 	}
 
@@ -302,11 +267,13 @@ public class EcommerceController {
 						cEmail = consoleScan.nextLine();
 						System.out.println("Password : ");
 						cPassword = consoleScan.nextLine();
+						System.out.println();
 						if (customers.containsKey(cEmail)) {
 							customer = customers.get(cEmail);
 							if (customer.getPassword().equals(cPassword)) {
 								while (true) {
-									System.out.println("\nWelcome " + customer.getName());
+									System.out.println("Welcome " + customer.getName());
+									System.out.println("\n+======Login Successful!=========+");
 									showItems();
 									input = displayCustMenu();
 									switch (input) {
