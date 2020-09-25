@@ -33,6 +33,13 @@ public class Customer {
 		this.contactNumber = contactNumber;
 	}
 
+	public Customer(String name, String password, String email) {
+		this.password = password;
+		this.email = email;
+		this.name = name;
+	}
+
+
 
 
 
@@ -78,12 +85,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", password=" + password + ", email=" + email + ", name=" + name + ", address="
-				+ address + ", contactNumber=" + contactNumber + "]";
+		return "Customer [email=" + email + ", name=" + name + "]";
 	}
-	
-	
-	
-	
-	
+
 }

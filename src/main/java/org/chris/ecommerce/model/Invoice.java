@@ -10,35 +10,63 @@ public class Invoice {
 	
 	
 	private long invoiceNo;
-	private String email; //this would be the full name of customer in invoice
-	private long itemId;
-	private String itemName;
-	private String itemCode;
-	private BigDecimal itemPrice; //price
-	private BigDecimal itemtotal;
-	private Date purchaseDate;
-	private int quantity = 1;
+	private Customer customer;
+	//private String email; //this would be the unique identifier of customer in invoice
+	private Item item;
+	// private long itemId;
+	// private String itemName;
+	// private String itemCode;
+	// private BigDecimal itemPrice; //price
+	// private BigDecimal itemtotal;
+	private String purchaseDate;
+	private int quantity = 1; //change to totalitemsQTY bought
 	private BigDecimal invoiceTotal;
 	
 	//Idea: make an counter for the quantity of a product that appears more than once in the list
+
+	public Invoice(long invoiceNo, Customer customer, Item item, String purchaseDate, BigDecimal invoiceTotal) {
+		this.invoiceNo = invoiceNo;
+		this.customer = customer;
+		this.item = item;
+		this.purchaseDate = purchaseDate;
+		this.invoiceTotal = invoiceTotal;
+	}
+
 	
 	@Override
 	public String toString() {
 		
 		String formatString = "+=======Invoice===========+\n"
-				+ "|Customer Email: " + email + " Date: " + purchaseDate + " |\n"
+				+ "|Customer Email: " + customer.getEmail() + " Date: " + purchaseDate + " |\n"
 				+ "|P.No\t Name \t Price \t Quantity \t Total  | \n"
-				+ "|" +itemId + "\t" + itemName + "\t" + itemCode +"\t" + itemPrice +"\t" + quantity +"\t" + itemPrice +"$"+ "| \n" 
+				+ "|" +item.getpId() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + "$"+ item.getItemPrice() + "| \n" 
 				+ "|------------------------------------\n"
 				+ "|Total = $"+ invoiceTotal + "| \n"
 				+ "|Thanks for visiting  \n"
 				+ "============================================|";
 			
-		
-		return "Invoice [invoiceNo=" + invoiceNo + ", email=" + email + ", itemName=" + itemName + ", itemCode="
-				+ itemCode + ", itemPrice=" + itemPrice + ", purchaseDate=" + purchaseDate + ", quantity=" + quantity
-				+ ", itemtotal=" + itemtotal + ", invoiceTotal=" + invoiceTotal + "]";
+
+		return "Invoice [invoiceNo=" + invoiceNo + ", email=" +  customer.getEmail() + ", itemName=" + item.getName() + ", itemCode="
+				+  item.getItemCode() + ", itemPrice=" + item.getItemPrice()  + ", quantity=" + quantity+ ", invoiceTotal=" + invoiceTotal + ", purchaseDate=" + purchaseDate + "]";
 	}
+
+	public String showInvoiceDetails(){
+		String formatString = "+=======Invoice===========+\n"
+		+ "|Customer Email: " + customer.getEmail() + " Date: " + purchaseDate + " |\n"
+		+ "|P.No\t Name \t Price \t Quantity \t Total  | \n"
+		+ "|" +item.getpId() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + "$"+ item.getItemPrice() + "| \n" 
+		+ "|------------------------------------\n"
+		+ "|Total = $"+ invoiceTotal + "| \n"
+		+ "|Thanks for visiting  \n"
+		+ "============================================|";
+
+		return formatString;
+
+
+	}
+
+
+
 	public long getInvoiceNo() {
 		return invoiceNo;
 	}
@@ -46,54 +74,30 @@ public class Invoice {
 		this.invoiceNo = invoiceNo;
 	}
 	
-	public Date getPurchaseDate() {
+	public String getPurchaseDate() {
 		return purchaseDate;
 	}
-	public void setPurchaseDate(Date purchaseDate) {
+	public void setPurchaseDate(String purchaseDate) {
+		
 		this.purchaseDate = purchaseDate;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public String getItemCode() {
-		return itemCode;
-	}
-	public void setItemCode(String itemCode) {
-		this.itemCode = itemCode;
-	}
-	public BigDecimal getItemPrice() {
-		return itemPrice;
-	}
-	public void setItemPrice(BigDecimal itemPrice) {
-		this.itemPrice = itemPrice;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public BigDecimal getItemtotal() {
-		return itemtotal;
-	}
-	public void setItemtotal(BigDecimal itemtotal) {
-		this.itemtotal = itemtotal;
-	}
+	// public String getEmail() {
+	// 	return email;
+	// }
+	// public void setEmail(String email) {
+	// 	this.email = email;
+	// }
+
 	public BigDecimal getInvoiceTotal() {
 		return invoiceTotal;
 	}
 	public void setInvoiceTotal(BigDecimal invoiceTotal) {
 		this.invoiceTotal = invoiceTotal;
 	}
+
+
+
+	
 	
 	
 		

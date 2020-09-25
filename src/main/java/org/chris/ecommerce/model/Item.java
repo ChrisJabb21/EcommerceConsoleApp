@@ -71,7 +71,7 @@ public class Item {
 	@Override
 	public String toString() {
 		
-		return  pId + " " + name + " " + itemCode + " " + itemPrice;
+		return  " \t" + name + "\t " + itemCode + "\t " + itemPrice;
 		
 //		return "Product [ItemNo=" + pId + ", Item name=" + name + ", itemCode=" + itemCode + ", itemPrice=" + itemPrice
 //				+ ", quantity=" + quantity + ", itemTotal=" + itemTotal + "]";

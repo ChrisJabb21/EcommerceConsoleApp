@@ -27,24 +27,21 @@ public class DataGeneratorUtil {
 		  
 		  long pId = 1;
 		  String pName = "Polarized Cyberpunk Sunglasses";
-		  String pCode = "SG01";
+		  String pCode = "PSG01";
 		  BigDecimal pPrice = new BigDecimal("39.99");
 		  int quantity = 1;
 		  BigDecimal itemTotal = pPrice;
 		  Item p = new Item(pId,pName, pCode, pPrice, quantity, itemTotal);
-	      items.put(pId, p); 
-	  }
-	  
-	  
-	  
-	  
-	  
-	  //TODO
-	  //invoice should contain customerid/customer details and product info
-	  public void generateInvoices(Map<Long, Invoice> invoices) {
-		 
-	  }
-	
-	
+		  items.put(pId, p); 
+		  
+		  long pTwoId = 2;
+		  String pTestName = "Rubber Ducky";
+		  String pTestCode = "D01";
+		  BigDecimal pTestPrice = new BigDecimal("12.99");
+		  int quantityTest = 1;
+		  BigDecimal item2Total = pPrice;
 
+		  Item p2 = new Item(pTwoId, pTestName, pTestCode, pTestPrice, quantityTest, item2Total);
+		  items.put(pTwoId, p2); 
+	  }
 }
