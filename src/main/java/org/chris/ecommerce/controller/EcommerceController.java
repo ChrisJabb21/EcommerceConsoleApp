@@ -1,9 +1,7 @@
 package org.chris.ecommerce.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,7 +18,7 @@ public class EcommerceController {
 	Map<String, Customer> customers;
 	Map<Long, Item> items;
 	Map<Long, Invoice> invoices; /// Place to store the invoices a customer creates
-	Map<String, Item> itemCodes; /// For itemcode lookup 
+	Map<String, Item> itemCodes; /// For itemcode lookup
 
 	Scanner consoleScan = new Scanner(System.in);
 	private Invoice invoice;
@@ -36,7 +34,7 @@ public class EcommerceController {
 		dataGeneratorUtil.generateItems(items);
 		invoices = new HashMap<Long, Invoice>();
 		itemCodes = new HashMap<String, Item>();
-		dataGeneratorUtil.generateInvoices(invoices,itemCodes);
+		dataGeneratorUtil.generateInvoices(invoices, itemCodes);
 
 	}
 
@@ -112,7 +110,7 @@ public class EcommerceController {
 		Customer customer;
 		String email;
 		String password;
-		// String confirm_password;
+		String confirmPassword;
 		String name;
 		System.out.println("Enter your details for a new customer account");
 		System.out.println("Name: ");
@@ -123,14 +121,25 @@ public class EcommerceController {
 			System.out.println("Email already exists, Try again..");
 			email = consoleScan.nextLine();
 		}
+		//
 		System.out.println("Password: ");
 		password = consoleScan.nextLine();
-		// System.out.println("Confirm password: ");
-		// password = consoleScan.nextLine();
+		System.out.println("Confirm password: ");
+		confirmPassword = consoleScan.nextLine();
 		// password check for matching strings.
-		customer = new Customer(name, password, email);
+		try {
+			if (password.equals(confirmPassword)) {
+				customer = new Customer(name, password, email);
 
-		customers.put(email, customer);
+				customers.put(email, customer);
+				System.out.println("Registration Successful");
+			} else {
+				System.out.println("Password does not match. try again");
+			}
+		} catch (Exception e) {
+			System.out.println("something happened, try again");
+		}
+
 	}
 
 	/**
@@ -142,7 +151,7 @@ public class EcommerceController {
 		Iterator iterator = set.iterator();
 		System.out.println("\n+================================+");
 		System.out.print("|ProductId \t Name \t\t Item Code \t Price |\t \n");
-		if(items.isEmpty()) {
+		if (items.isEmpty()) {
 			System.out.println("No purchases have been made on this account ");
 		}
 		while (iterator.hasNext()) {
@@ -180,8 +189,10 @@ public class EcommerceController {
 		choice = consoleScan.nextLine();
 		selected = Long.parseLong(choice);
 
-		// Extra credit Idea/challenge: ask for how much of an idea to buy/quantity and get the invoice to show the total of all item elements in item list
-		// Extra // ask if a user wants to purchase a different item and prompt if they are finished.
+		// Extra credit Idea/challenge: ask for how much of an idea to buy/quantity and
+		// get the invoice to show the total of all item elements in item list
+		// Extra // ask if a user wants to purchase a different item and prompt if they
+		// are finished.
 
 		try {
 			if (items.containsKey(selected)) {
@@ -194,7 +205,6 @@ public class EcommerceController {
 				invoices.put(invoiceNo, invoice);
 				itemCodes.put(item.getItemCode(), item);
 
-
 				invoice.showInvoiceDetails();
 
 				invoice.toString();
@@ -206,7 +216,6 @@ public class EcommerceController {
 		}
 	}
 
-	// TODO change a datatype of purchase date for date check.
 	/**
 	 * Method for checking a purchase by invoice and purchase date and returning an
 	 * item within a 15 day return policy
@@ -226,48 +235,44 @@ public class EcommerceController {
 			input = consoleScan.nextLine();
 			invoiceNo = Long.parseLong(input);
 
-			if(invoices.containsKey(invoiceNo)) {
+			if (invoices.containsKey(invoiceNo)) {
 				System.out.println("Invoice found");
 				enteredInvoice = invoices.get(invoiceNo);
-				
+
 				System.out.println("Enter the itemcode of the item to replace.");
 				input = consoleScan.nextLine();
 
+				if (itemCodes.containsKey(input)) {
 
-			if(itemCodes.containsKey(input))
-				{
+					itemToReplace = itemCodes.get(input);
+					long validDate = ChronoUnit.DAYS.between(enteredInvoice.getPurchaseDate(), LocalDate.now());
 
-				itemToReplace = itemCodes.get(input);
-				long validDate = ChronoUnit.DAYS.between(enteredInvoice.getPurchaseDate(), LocalDate.now());	
-
-				  if(validDate >= -15)
-				  {
-				  System.out. println("Yes, you can return your purchase. Would you like to proceed (enter y for yes or n for no.)");
-				  choice = consoleScan.nextLine();
-					if(choice.equals("y")) {
-					System.out.println("Return successful,Your replaced item is" + itemToReplace.toString()); //return item object as string
-					} 
-					else if(choice.equals("n")) 
-					{
-						System.out.println("Returning back to customer menu");
-						displayCustMenu();
+					if (validDate >= -15) {
+						System.out.println(
+								"Yes, you can return your purchase. Would you like to proceed (enter y for yes or n for no.)");
+						choice = consoleScan.nextLine();
+						if (choice.equals("y")) {
+							System.out.println("Return successful,Your replaced item is" + itemToReplace.toString()); // return
+																														// item
+																														// object
+																														// as
+																														// string
+						} else if (choice.equals("n")) {
+							System.out.println("Returning back to customer menu");
+							displayCustMenu();
+						} else {
+							System.out.println("Not valid input");
+						}
+					} else {
+						System.out.println(
+								"Your purchase is past the 15 day period. You are not able to return or replace your item(s)");
 					}
-					else 
-					{
-						System.out.println("Not valid input");
-					}
-				 }
-				 else {
-					System.out.println("Your purchase is past the 15 day period. You are not able to return or replace your item(s)");
-				}	
 
-				 
-			}
-			else{
-				System.out.println("You dont have this item in your invoice"); 
+				} else {
+					System.out.println("You dont have this item in your invoice");
 				}
-		}
-	 } catch (Exception e) {
+			}
+		} catch (Exception e) {
 			System.out.println("Not a valid choice");
 
 		}
