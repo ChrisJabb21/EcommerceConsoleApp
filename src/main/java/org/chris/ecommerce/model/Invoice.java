@@ -1,20 +1,22 @@
 package org.chris.ecommerce.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 //import java.util.Date;
-//import java.util.List;
+import java.util.List;
 
 public class Invoice {
 	
 	private long invoiceNo;
 	private Customer customer;
 	private Item item;
-	//private List<Item> items;
-	private String purchaseDate;
+	private List<Item> items;
+	private LocalDate purchaseDate;
 	private int quantity = 1; //change to totalitemsQTY bought
 	private BigDecimal invoiceTotal;
 	
-	public Invoice(long invoiceNo, Customer customer, Item item, String purchaseDate, BigDecimal invoiceTotal) {
+	public Invoice(long invoiceNo, Customer customer, Item item, LocalDate purchaseDate, BigDecimal invoiceTotal) {
 		this.invoiceNo = invoiceNo;
 		this.customer = customer;
 		this.item = item;
@@ -23,12 +25,21 @@ public class Invoice {
 	}
 
 	
+	public Invoice(long invoiceNo, Customer customer, Item item, BigDecimal invoiceTotal) {
+		this.invoiceNo = invoiceNo;
+		this.customer = customer;
+		this.item = item;
+		this.purchaseDate = LocalDate.now();
+		this.invoiceTotal = invoiceTotal;
+	}
+
+	
 	@Override
 	public String toString() {
 
 	String testString= 
-		"Invoice No: \t EMAIL  \t ItemName \t ItemCode \t Price \t Quantity \t  ItemTotal \t PurchaseDate | \n"
-		+ invoiceNo + "\t" + customer.getEmail() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + item.getItemPrice() + "\t"+ getPurchaseDate() + "| \n";
+		"Invoice No\tEMAIL\tItemName\tItemCode\tPrice\tQuantity\tItemTotal\tPurchaseDate | \n"
+		+" "+ invoiceNo + "\t" + customer.getEmail() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t\t" + item.getItemPrice() + "\t\t"+ getPurchaseDate() + "| \n";
 
 		return testString;
 
@@ -36,13 +47,13 @@ public class Invoice {
 
 	public String showInvoiceDetails(){
 		String formatString = "+=======Invoice===========+\n"
-		+ "|Customer Email: " + customer.getEmail() + " Date: " + purchaseDate + "|\n"
-		+ "|Invoice No " + invoiceNo + "|\n"
-		+ "|P.No\t Name  \t ItemCode \t Price \t Quantity \t Total  | \n"
-		+ "|" +item.getpId() + "\t \t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t" + "$"+ item.getItemPrice() + "| \n" 
+		+ "|Customer Email: " + customer.getEmail() + "\t"+ " Date: " + purchaseDate + "|\n"
+		+ "|Invoice No: " + invoiceNo + "|\n"
+		+ "|P.No\t\tName\t\tItemCode\t\tPrice\t\tQuantity\t\tTotal  | \n"
+		+ "|" +item.getpId() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t\t\t" + item.getItemPrice() +"\t\t" + item.getQuantity() +"\t\t\t" + "$"+ item.getItemPrice() + "| \n" 
 		+ "|----------------------------------------------|\n"
 		+ "|Total = $"+ invoiceTotal +"|\n"
-		+ "|Thanks for visiting|\n"
+		+ "|Thank you for your purchase!|\n"
 		+ "============================================|";
 
 		return formatString;
@@ -59,10 +70,10 @@ public class Invoice {
 		this.invoiceNo = invoiceNo;
 	}
 	
-	public String getPurchaseDate() {
+	public LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
-	public void setPurchaseDate(String purchaseDate) {
+	public void setPurchaseDate(LocalDate purchaseDate) {
 		
 		this.purchaseDate = purchaseDate;
 	}
@@ -96,13 +107,13 @@ public class Invoice {
 		this.item = item;
 	}
 
-	// public List<Item> getItems() {
-	// 	return items;
-	// }
+	public List<Item> getItems() {
+		return items;
+	}
 
-	// public void setItems(List<Item> items) {
-	// 	this.items = items;
-	// }
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
 }
 
 
