@@ -2,8 +2,6 @@ package org.chris.ecommerce.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-//import java.util.Date;
 import java.util.List;
 
 public class Invoice {
@@ -60,9 +58,6 @@ public class Invoice {
 
 
 	}
-
-
-
 	public long getInvoiceNo() {
 		return invoiceNo;
 	}
@@ -77,12 +72,6 @@ public class Invoice {
 		
 		this.purchaseDate = purchaseDate;
 	}
-	// public String getEmail() {
-	// 	return email;
-	// }
-	// public void setEmail(String email) {
-	// 	this.email = email;
-	// }
 
 	public BigDecimal getInvoiceTotal() {
 		return invoiceTotal;
