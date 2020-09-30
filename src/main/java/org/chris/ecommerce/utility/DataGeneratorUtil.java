@@ -2,7 +2,6 @@ package org.chris.ecommerce.utility;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.chris.ecommerce.model.Customer;
@@ -62,7 +61,7 @@ public class DataGeneratorUtil {
 		BigDecimal pPrice4 = new BigDecimal("65.99");
 		int quantityTest4 = 1;
 		BigDecimal item4Total = pPrice4; // item price * quantity.
-		Item p4 = new Item(pId4, pName4, pCode4, pPrice4, quantityTest4, item3Total);
+		Item p4 = new Item(pId4, pName4, pCode4, pPrice4, quantityTest4, item4Total);
 		items.put(pId4, p4);
 	}
 
