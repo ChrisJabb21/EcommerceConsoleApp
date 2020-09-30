@@ -55,6 +55,15 @@ public class DataGeneratorUtil {
 		items.put(pTwoId, p2);
 		items.put(pThreeId, p3);
 
+		long pId4 = 4;
+		//String pName4 = "How to be a Hero By Daniel Birmingham unabridged edition";
+		String pName4 = "Makar's Makarov water gun";
+		String pCode4 = "MM01";
+		BigDecimal pPrice4 = new BigDecimal("65.99");
+		int quantityTest4 = 1;
+		BigDecimal item4Total = pPrice4; // item price * quantity.
+		Item p4 = new Item(pId4, pName4, pCode4, pPrice4, quantityTest4, item3Total);
+		items.put(pId4, p4);
 	}
 
 	public void generateInvoices(Map<Long, Invoice> invoices, Map<String, Item>itemCodes) {

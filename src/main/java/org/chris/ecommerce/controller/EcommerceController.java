@@ -79,13 +79,13 @@ public class EcommerceController {
 		String inputToParse;
 		int selected;
 
-		System.out.println("+================================+");
+		System.out.println("+==========Customer Menu=========+");
 		System.out.println("|1. Buy an Item                  |");
 		System.out.println("|2. Return an Item               |");
 		System.out.println("|3. Log out                      |"); // return user to to main menu
 		System.out.println("+================================+");
 		while (true) {
-			System.out.println("Enter a number (1,2,3) : ");
+			System.out.println("Enter a number (1,2,3) from Customer menu : ");
 			inputToParse = consoleScan.nextLine();
 			try {
 				selected = Integer.parseInt(inputToParse);
@@ -149,7 +149,7 @@ public class EcommerceController {
 	private void showItems() {
 		Set set = items.entrySet();
 		Iterator iterator = set.iterator();
-		System.out.println("\n+================================+");
+		System.out.println("\n+=============Items in Stock===================+");
 		System.out.print("|ProductId \t Name \t\t Item Code \t Price |\t \n");
 		if (items.isEmpty()) {
 			System.out.println("No purchases have been made on this account ");
@@ -210,6 +210,9 @@ public class EcommerceController {
 				invoice.toString();
 				System.out.println(invoice.showInvoiceDetails());
 				System.out.println(invoice.toString());
+				System.out.println("Press Enter to continue");
+				System.in.read();
+
 			}
 		} catch (Exception e) {
 			System.out.println("Please enter the product number from the catalog.");
@@ -252,11 +255,9 @@ public class EcommerceController {
 								"Yes, you can return your purchase. Would you like to proceed (enter y for yes or n for no.)");
 						choice = consoleScan.nextLine();
 						if (choice.equals("y")) {
-							System.out.println("Return successful,Your replaced item is" + itemToReplace.toString()); // return
-																														// item
-																														// object
-																														// as
-																														// string
+							System.out.println("Return successful,Your replaced item is" + itemToReplace.toString());
+							System.out.println("Press Enter to continue");
+							System.in.read();
 						} else if (choice.equals("n")) {
 							System.out.println("Returning back to customer menu");
 							displayCustMenu();
@@ -266,6 +267,8 @@ public class EcommerceController {
 					} else {
 						System.out.println(
 								"Your purchase is past the 15 day period. You are not able to return or replace your item(s)");
+								System.out.println("Press Enter to continue");
+								System.in.read();
 					}
 
 				} else {
@@ -303,18 +306,21 @@ public class EcommerceController {
 						System.out.println();
 						if (customers.containsKey(cEmail)) {
 							customer = customers.get(cEmail);
+							System.out.println("\n+======Login Successful!=========+");
+							System.out.println("Welcome " + customer.getName());
 							if (customer.getPassword().equals(cPassword)) {
 								while (true) {
-									System.out.println("\n+======Login Successful!=========+");
-									System.out.println("Welcome " + customer.getName());
+									
 									showItems();
 									input = displayCustMenu();
 									switch (input) {
 										case 1:
 											buyItem(customer);
+											System.in.read();
 											break;
 										case 2:
 											ReplaceItem(customer);
+											System.in.read();
 											break;
 										case 3: {
 											System.out.println("Signed out successfully");

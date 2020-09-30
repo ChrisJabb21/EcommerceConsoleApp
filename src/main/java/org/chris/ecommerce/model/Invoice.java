@@ -38,19 +38,19 @@ public class Invoice {
 	public String toString() {
 
 	String testString= 
-		"Invoice No\tEMAIL\tItemName\tItemCode\tPrice\tQuantity\tItemTotal\tPurchaseDate | \n"
-		+" "+ invoiceNo + "\t" + customer.getEmail() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t\t" + item.getItemPrice() + "\t\t"+ getPurchaseDate() + "| \n";
+		"Invoice No\tEMAIL\t\tItemName\tItemCode\tPrice\tQuantity\tItemTotal\tPurchaseDate | \n"
+		+" "+ invoiceNo + "\t\t" + customer.getEmail() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t" + item.getItemPrice() +"\t" + item.getQuantity() +"\t\t" + item.getItemPrice() + "\t\t"+ getPurchaseDate() + "| \n";
 
 		return testString;
 
 	}
 
 	public String showInvoiceDetails(){
-		String formatString = "+=======Invoice===========+\n"
+		String formatString = "+=======Invoice Generated!===========+\n"
 		+ "|Customer Email: " + customer.getEmail() + "\t"+ " Date: " + purchaseDate + "|\n"
 		+ "|Invoice No: " + invoiceNo + "|\n"
-		+ "|P.No\t\tName\t\tItemCode\t\tPrice\t\tQuantity\t\tTotal  | \n"
-		+ "|" +item.getpId() + "\t" + item.getName() + "\t" + item.getItemCode() +"\t\t\t" + item.getItemPrice() +"\t\t" + item.getQuantity() +"\t\t\t" + "$"+ item.getItemPrice() + "| \n" 
+		+ "|P.No\t\tName\t\t\tItemCode\t\tPrice\t\tQuantity\t\tTotal  | \n"
+		+ "|" +item.getpId() + "\t" + item.getName() + "\t\t" + item.getItemCode() +"\t\t\t" + item.getItemPrice() +"\t\t" + item.getQuantity() +"\t\t\t" + "$"+ item.getItemPrice() + "| \n" 
 		+ "|----------------------------------------------|\n"
 		+ "|Total = $"+ invoiceTotal +"|\n"
 		+ "|Thank you for your purchase!|\n"
